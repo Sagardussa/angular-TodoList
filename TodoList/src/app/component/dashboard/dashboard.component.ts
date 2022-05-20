@@ -9,18 +9,59 @@ import { CrudService } from 'src/app/service/crud.service';
 })
 export class DashboardComponent implements OnInit {
   taskObj: Task = new Task();
-  taskarry: Task[] = [];
+  taskArr: Task[] = [];
 
   addTaskValue: string = '';
   constructor(private curdService: CrudService) {}
 
-  ngOnInit(): void {}
-  addTask(etask: Task) {
-    this.curdService.addtask(etask).subscribe({
-      next: (res) => {},
-      error: (err) => {
-        alert(err);
+  ngOnInit(): void {
+    this.taskObj = new Task();
+    this.taskArr = [];
+    this.getAllTask();
+  }
+
+  getAllTask() {
+    this.curdService.getAllTask().subscribe(
+      (res) => {
+        this.taskArr = res;
       },
-    });
+      (err) => {
+        alert('unable to get list of Task ');
+      }
+    );
+  }
+  addTask() {
+    this.taskObj.task_name = this.addTaskValue;
+    this.curdService.addtask(this.taskObj).subscribe(
+      (res) => {
+        this.ngOnInit();
+        this.addTaskValue = '';
+      },
+      (err) => {
+        alert(err);
+      }
+    );
+  }
+
+  editTask() {
+    this.curdService.editTask(this.taskObj).subscribe(
+      (res) => {
+        this.ngOnInit();
+      },
+      (err) => {
+        alert('failed to update task');
+      }
+    );
+  }
+
+  deleteTask(etask: Task) {
+    this.curdService.editTask(etask).subscribe(
+      (res) => {
+        this.ngOnInit();
+      },
+      (err) => {
+        alert('failed to delete Task ');
+      }
+    );
   }
 }
