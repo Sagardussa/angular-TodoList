@@ -12,9 +12,12 @@ export class DashboardComponent implements OnInit {
   taskArr: Task[] = [];
 
   addTaskValue: string = '';
+  editTAskVAlue: string = '';
   constructor(private curdService: CrudService) {}
 
   ngOnInit(): void {
+    this.editTAskVAlue = '';
+    this.addTaskValue = '';
     this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTask();
@@ -31,19 +34,24 @@ export class DashboardComponent implements OnInit {
     );
   }
   addTask() {
-    this.taskObj.task_name = this.addTaskValue;
-    this.curdService.addtask(this.taskObj).subscribe(
-      (res) => {
-        this.ngOnInit();
-        this.addTaskValue = '';
-      },
-      (err) => {
-        alert(err);
-      }
-    );
+    if (this.addTaskValue === '') {
+      alert('enter the task');
+    } else {
+      this.taskObj.task_name = this.addTaskValue;
+      this.curdService.addtask(this.taskObj).subscribe(
+        (res) => {
+          this.ngOnInit();
+          this.addTaskValue = '';
+        },
+        (err) => {
+          alert(err);
+        }
+      );
+    }
   }
 
   editTask() {
+    this.taskObj.task_name = this.editTAskVAlue;
     this.curdService.editTask(this.taskObj).subscribe(
       (res) => {
         this.ngOnInit();
@@ -55,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteTask(etask: Task) {
-    this.curdService.editTask(etask).subscribe(
+    this.curdService.deleteTask(etask).subscribe(
       (res) => {
         this.ngOnInit();
       },
@@ -63,5 +71,10 @@ export class DashboardComponent implements OnInit {
         alert('failed to delete Task ');
       }
     );
+  }
+
+  call(etask: Task) {
+    this.taskObj = etask;
+    this.editTAskVAlue = etask.task_name;
   }
 }
