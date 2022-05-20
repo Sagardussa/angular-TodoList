@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CrudService {
-
-  constructor() { }
+  serviceURL: string;
+  constructor() {
+    this.serviceURL = 'http://localhost:3000/tasks';
+  }
 }
