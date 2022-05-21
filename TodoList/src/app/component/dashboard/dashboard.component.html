@@ -18,18 +18,18 @@
               [(ngModel)]="addTaskValue"
             />
             <button
-              class="btn btn-outline-success"
+              class="btn btn-outline-success m-2"
               type="button"
               (click)="addTask()"
             >
-              +
+              Add <i class="bi bi-plus-square-dotted"></i>
             </button>
           </div>
         </div>
         <h4 class="text-primary mt-4">Tasks :</h4>
 
         <div style="overflow-y: auto; height: 350px">
-          <div class="m-3" *ngFor="let task of taskArr">
+          <div class="m-3" *ngFor="let task of taskArr; index as i">
             <div class="p-2 shadow border">
               <div class="input-group row ps-3">
                 <div class="card col-md-10 border-0">{{ task.task_name }}</div>
@@ -40,13 +40,14 @@
                   type="button"
                   (click)="call(task)"
                 >
-                  edit
+                  edit <i class="bi bi-pencil-square"></i>
                 </button>
                 <button
+                  *ngIf="i > 0"
                   class="btn btn-outline-danger col"
                   (click)="deleteTask(task)"
                 >
-                  delete
+                  <i class="bi bi-trash"></i>
                 </button>
               </div>
             </div>
@@ -64,7 +65,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                <h5 class="modal-title">Edit Task</h5>
                 <button
                   type="button"
                   class="btn-close"
