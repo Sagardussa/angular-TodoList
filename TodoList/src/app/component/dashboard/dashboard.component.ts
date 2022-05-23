@@ -13,11 +13,17 @@ export class DashboardComponent implements OnInit {
 
   addTaskValue: string = '';
   editTAskVAlue: string = '';
+  date: string = '';
+  time: string = '';
+  show: boolean = false;
+
   constructor(private curdService: CrudService) {}
 
   ngOnInit(): void {
     this.editTAskVAlue = '';
     this.addTaskValue = '';
+    this.date = '';
+    this.time = '';
     this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTask();
@@ -34,14 +40,18 @@ export class DashboardComponent implements OnInit {
     );
   }
   addTask() {
-    if (this.addTaskValue === '') {
-      alert('enter the task');
+    if (this.addTaskValue == '' || this.date == '' || this.time == '') {
+      alert('enter all information');
     } else {
       this.taskObj.task_name = this.addTaskValue;
+      this.taskObj.date = this.date;
+      this.taskObj.time = this.time;
       this.curdService.addtask(this.taskObj).subscribe(
         (res) => {
           this.ngOnInit();
           this.addTaskValue = '';
+          this.date = '';
+          this.time = '';
         },
         (err) => {
           alert(err);

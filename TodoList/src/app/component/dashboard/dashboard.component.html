@@ -3,8 +3,8 @@
     <div class="row mt-4" style="height: 500px">
       <div class="col"></div>
 
-      <div class="col-md-8 bg-white shadow">
-        <div class="card bg-warning mt-4">
+      <div class="col-md-6 bg-white shadow">
+        <div class="card bg-primary mt-4">
           <h4 class="text-white ps-3 pt-2 pb-2">To Do List</h4>
         </div>
 
@@ -17,10 +17,27 @@
               name="task"
               [(ngModel)]="addTaskValue"
             />
+            &nbsp;
+            <input
+              type="date"
+              class="form-control"
+              name="date"
+              [(ngModel)]="date"
+            />
+            &nbsp;
+            <input
+              type="time"
+              class="form-control"
+              name="time"
+              [(ngModel)]="time"
+            />
+
             <button
               class="btn btn-outline-success m-2"
               type="button"
+              [disabled]="show"
               (click)="addTask()"
+              title="Add"
             >
               Add <i class="bi bi-plus-square-dotted"></i>
             </button>
@@ -32,23 +49,38 @@
           <div class="m-3" *ngFor="let task of taskArr; index as i">
             <div class="p-2 shadow border">
               <div class="input-group row ps-3">
-                <div class="card col-md-10 border-0">{{ task.task_name }}</div>
-                <button
-                  class="btn btn-outline-primary col me-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  type="button"
-                  (click)="call(task)"
-                >
-                  edit <i class="bi bi-pencil-square"></i>
-                </button>
-                <button
-                  *ngIf="i > 0"
-                  class="btn btn-outline-danger col"
-                  (click)="deleteTask(task)"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
+                <div class="card col-md-10 border-0">
+                  <h5>
+                    {{ task.task_name }}
+                  </h5>
+                  <p><span>Date-</span> {{ task.date }}</p>
+                  <p><span>Time-</span> {{ task.time }}</p>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                  <div>
+                    <button
+                      class="btn btn-outline-primary col me-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      type="button"
+                      (click)="call(task)"
+                      title="Edit"
+                    >
+                      edit <i class="bi bi-pencil-square"></i>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      *ngIf="i > 0"
+                      class="btn btn-outline-danger col"
+                      (click)="deleteTask(task)"
+                      title="Delete"
+                    >
+                      Delete <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,6 +113,18 @@
                     placeholder="Enter Tasks "
                     name="task"
                     [(ngModel)]="editTAskVAlue"
+                  />
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Enter Tasks "
+                    name="date"
+                  />
+                  <input
+                    type="time"
+                    class="form-control"
+                    placeholder="Enter Tasks "
+                    name="time"
                   />
                   <button
                     class="btn btn-outline-success"
