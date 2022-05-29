@@ -45,16 +45,17 @@
         </div>
         <h4 class="text-primary mt-4">Tasks :</h4>
 
-        <div style="overflow-y: auto; height: 350px">
+        <div style="overflow-y: auto; height: 360px">
           <div class="m-3" *ngFor="let task of taskArr; index as i">
             <div class="p-2 shadow border">
               <div class="input-group row ps-3">
                 <div class="card col-md-10 border-0">
-                  <h5>
+                  <span>
+                    {{ task.date | date: "LLL dd yyyy" }} {{ task.time }}
+                  </span>
+                  <h4>
                     {{ task.task_name }}
-                  </h5>
-                  <p><span>Date-</span> {{ task.date }}</p>
-                  <p><span>Time-</span> {{ task.time }}</p>
+                  </h4>
                 </div>
 
                 <div class="d-flex justify-content-end">
@@ -119,12 +120,14 @@
                     class="form-control"
                     placeholder="Enter Tasks "
                     name="date"
+                    [(ngModel)]="editDate"
                   />
                   <input
                     type="time"
                     class="form-control"
                     placeholder="Enter Tasks "
                     name="time"
+                    [(ngModel)]="editTime"
                   />
                   <button
                     class="btn btn-outline-success"

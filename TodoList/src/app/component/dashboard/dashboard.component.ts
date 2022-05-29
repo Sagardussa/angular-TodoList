@@ -13,6 +13,9 @@ export class DashboardComponent implements OnInit {
 
   addTaskValue: string = '';
   editTAskVAlue: string = '';
+  editDate: string = '';
+  editTime: string = '';
+
   date: string = '';
   time: string = '';
   show: boolean = false;
@@ -21,6 +24,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.editTAskVAlue = '';
+    this.editDate = '';
+    this.editTime = '';
     this.addTaskValue = '';
     this.date = '';
     this.time = '';
@@ -58,10 +63,13 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
+    alert('Done');
   }
 
   editTask() {
     this.taskObj.task_name = this.editTAskVAlue;
+    this.taskObj.date = this.editDate;
+    this.taskObj.time = this.editTime;
     this.curdService.editTask(this.taskObj).subscribe(
       (res) => {
         this.ngOnInit();
@@ -86,5 +94,7 @@ export class DashboardComponent implements OnInit {
   call(etask: Task) {
     this.taskObj = etask;
     this.editTAskVAlue = etask.task_name;
+    this.editDate = etask.date;
+    this.editTime = etask.time;
   }
 }
