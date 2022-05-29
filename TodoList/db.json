@@ -3,20 +3,8 @@
     {
       "id": 1,
       "task_name": "welcome to To Do List",
-      "date": "2022-05-26",
+      "date": "2022-05-29",
       "time": "17:38"
-    },
-    {
-      "id": 2,
-      "task_name": "Sagar",
-      "date": "2022-06-24",
-      "time": "19:22"
-    },
-    {
-      "id": 3,
-      "task_name": "Duss",
-      "date": "2022-05-31",
-      "time": "15:32"
     }
   ]
 }

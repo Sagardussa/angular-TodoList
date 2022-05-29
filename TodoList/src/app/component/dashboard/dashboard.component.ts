@@ -98,27 +98,4 @@ export class DashboardComponent implements OnInit {
     this.editDate = etask.date;
     this.editTime = etask.time;
   }
-  // alerate() {
-  //   let year = new Date().getFullYear();
-  //   let month = new Date().getMonth();
-  //   let day = new Date().getUTCDate();
-  //   let Hours = new Date().getHours();
-  //   let Min = new Date().getMinutes();
-  //   //console.log(year);
-  //   //console.log(month);
-  //   //console.log(day);
-  //   //console.log(Hours);
-  //   //console.log(Min);
-  //   let userdate = this.taskArr.filter((t) => t.date);
-  //   console.log(userdate);
-  // }
-
-  addreminder() {
-    this.taskObj.task_name = this.addTaskValue;
-    this.taskObj.date = this.date;
-    this.taskObj.time = this.time;
-
-    let date = this.taskObj.date;
-    console.log(date);
-  }
 }
